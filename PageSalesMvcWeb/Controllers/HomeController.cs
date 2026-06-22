@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using PageSalesMvcWeb.Models;
-
+using PageSalesMvcWeb.Models.ViewModels;
 namespace PageSalesMvcWeb.Controllers
 {
     public class HomeController : Controller
