@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using PageSalesMvcWeb.Data;
 namespace PageSalesMvcWeb
 {
     public class Program
@@ -5,6 +8,8 @@ namespace PageSalesMvcWeb
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddDbContext<PageSalesMvcWebContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("PageSalesMvcWebContext") ?? throw new InvalidOperationException("Connection string 'PageSalesMvcWebContext' not found.")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
