@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using PageSalesMvcWeb.Data;
+using System.Configuration;
 namespace PageSalesMvcWeb
 {
     public class Program
@@ -9,7 +10,11 @@ namespace PageSalesMvcWeb
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbContext<PageSalesMvcWebContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("PageSalesMvcWebContext") ?? throw new InvalidOperationException("Connection string 'PageSalesMvcWebContext' not found.")));
+                options.UseMySql(
+                    builder.Configuration.GetConnectionString("PageSalesMvcWebContext"),
+                ServerVersion.AutoDetect(
+            builder.Configuration.GetConnectionString("PageSalesMvcWebContext")
+                        )));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
