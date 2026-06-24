@@ -15,5 +15,7 @@ namespace PageSalesMvcWeb.Data
         }
 
         public DbSet<PageSalesMvcWeb.Models.Department> Department { get; set; } = default!;
+        public DbSet<PageSalesMvcWeb.Models.Seller> Seller { get; set; }
+        public DbSet<PageSalesMvcWeb.Models.SalesRecord> SalesRecord { get; set; }
     }
 }
