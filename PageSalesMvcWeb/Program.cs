@@ -15,6 +15,7 @@ namespace PageSalesMvcWeb
                 ServerVersion.AutoDetect(
             builder.Configuration.GetConnectionString("PageSalesMvcWebContext")
                         )));
+            builder.Services.AddScoped<SeedingService>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -40,7 +41,15 @@ namespace PageSalesMvcWeb
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
+            using (var scope = app.Services.CreateScope())
+            {
+                var seedingService = scope.ServiceProvider.GetRequiredService<SeedingService>();
+                seedingService.Seed();
+            }
+
             app.Run();
+
+
         }
     }
 }
